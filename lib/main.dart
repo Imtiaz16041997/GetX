@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/view/screen/splash_screen.dart';
 
 import 'view/screen/home_screen.dart';
 
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       title: 'GetX',
       debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+      home: SplashScreen(),
     );
   }
 }
