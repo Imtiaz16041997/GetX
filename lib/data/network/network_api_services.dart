@@ -44,4 +44,31 @@ class NetworkApiServices extends BaseApiServices {
       }
   }
 
+  @override
+  Future postApi(var data, String url) async {
+    if(kDebugMode ){
+      print(url);
+      print(data);
+    }
+    dynamic responseJson;
+
+    try
+    {
+
+      final response = await http.post(Uri.parse(url),
+      //if request body is in RawForm then it will encode otherwise not
+        body: jsonDecode(data)
+
+
+      ).timeout(const Duration(seconds: 10));
+      responseJson = returnResponse(response);
+    }on SocketException{
+      throw InternetException('');
+    }on RequestTimeOutException {
+      throw RequestTimeOutException('');
+    }
+
+    return responseJson;
+  }
+
 }
