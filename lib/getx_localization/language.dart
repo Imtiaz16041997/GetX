@@ -8,8 +8,9 @@ class Languages extends Translations{
   Map<String, Map<String, String>> get keys => {
     'en_US': {
       'email_hint': 'Enter Email',
-      'internet_exception': "we're unable to show results. \nPlease check your data\nconnection!",
-      'retry':'Retry'
+      'internet_exception': "we're unable to show results. \nPlease check your data\nconnection.",
+      'retry':'Retry',
+      'general_exception': "we're unable to process your request.\nPlease try again!!",
     },
     'ur_PK':{
       'email_hint': 'احداث'
