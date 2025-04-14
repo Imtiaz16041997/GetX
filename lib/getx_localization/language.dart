@@ -11,6 +11,9 @@ class Languages extends Translations{
       'internet_exception': "we're unable to show results. \nPlease check your data\nconnection.",
       'retry':'Retry',
       'general_exception': "we're unable to process your request.\nPlease try again!!",
+      'welcome_back': "Welcome \nBack",
+      'login': "Login",
+      'pass_hint': "Password",
     },
     'ur_PK':{
       'email_hint': 'احداث'
