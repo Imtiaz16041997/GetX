@@ -15,7 +15,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
 
-  final loginController = Get.put(LoginViewModelController());
+  final loginViewModelController = Get.put(LoginViewModelController());
   final _formKey =  GlobalKey<FormState> ();
 
 
@@ -40,15 +40,15 @@ class _LoginViewState extends State<LoginView> {
               child: Column(
                 children: [
                   TextFormField(
-                    controller: loginController.emailController.value,
-                    focusNode: loginController.emailFocusNode.value,
+                    controller: loginViewModelController.emailController.value,
+                    focusNode: loginViewModelController.emailFocusNode.value,
                     validator: (value){
                       if(value!.isEmpty){
                         Utils.snackBar('Email', 'Enter Email');
                       }
                     },
                     onFieldSubmitted: (value){
-                      Utils.filedFocusChange(context, loginController.emailFocusNode.value, loginController.passwordFocusNode.value);
+                      Utils.filedFocusChange(context, loginViewModelController.emailFocusNode.value, loginViewModelController.passwordFocusNode.value);
                     },
                     decoration: InputDecoration(
                         hintText: 'email_hint'.tr,
@@ -57,8 +57,8 @@ class _LoginViewState extends State<LoginView> {
                   ),
                   SizedBox(height: 20,),
                   TextFormField(
-                    controller: loginController.passwordController.value,
-                    focusNode: loginController.passwordFocusNode.value,
+                    controller: loginViewModelController.passwordController.value,
+                    focusNode: loginViewModelController.passwordFocusNode.value,
                     obscureText: true,
                     validator: (value){
                       if(value!.isEmpty){
@@ -76,12 +76,14 @@ class _LoginViewState extends State<LoginView> {
               ),
             ),
             SizedBox(height: 40,),
-            RoundButtonComponent(
-              width: 200,title: 'login'.tr,onPress: (){
-                if(_formKey.currentState!.validate()){
-
-                }
-            },)
+            Obx(()=> RoundButtonComponent(
+              width: 200,
+              loading: loginViewModelController.loading.value,
+              title: 'login'.tr,onPress: (){
+              if(_formKey.currentState!.validate()){
+                loginViewModelController.loginApi();
+              }
+            },))
 
           ],
         ),

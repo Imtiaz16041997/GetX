@@ -20,8 +20,8 @@ class NetworkApiServices extends BaseApiServices {
     try
     {
 
-      final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
-      responseJson = returnResponse(response);
+    final response = await http.get(Uri.parse(url)).timeout(const Duration(seconds: 10));
+    responseJson = returnResponse(response);
     }on SocketException{
       throw InternetException('');
     }on RequestTimeOutException {
@@ -51,14 +51,14 @@ class NetworkApiServices extends BaseApiServices {
       print(data);
     }
     dynamic responseJson;
-
     try
     {
-
       final response = await http.post(Uri.parse(url),
+          headers: {
+            'Content-Type': 'application/json',
+          },
       //if request body is in RawForm then it will encode otherwise not
-        body: jsonDecode(data)
-
+        body: jsonEncode(data)
 
       ).timeout(const Duration(seconds: 10));
       responseJson = returnResponse(response);
