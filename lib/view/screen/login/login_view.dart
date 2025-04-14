@@ -4,6 +4,8 @@ import 'package:getx/components/round_button_component.dart';
 import 'package:getx/res/colors/colors.dart';
 import 'package:getx/view_models/controller/login_view_model_controller.dart';
 
+import '../../../utils/utils.dart';
+
 class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
@@ -14,7 +16,7 @@ class LoginView extends StatefulWidget {
 class _LoginViewState extends State<LoginView> {
 
   final loginController = Get.put(LoginViewModelController());
-
+  final _formKey =  GlobalKey<FormState> ();
 
 
 
@@ -33,19 +35,52 @@ class _LoginViewState extends State<LoginView> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextFormField(
-              controller: loginController.emailController.value,
-              focusNode: loginController.emailFocusNode.value,
-              decoration: InputDecoration(
-                hintText: 'email_hint'.tr,
-                border: OutlineInputBorder()
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    controller: loginController.emailController.value,
+                    focusNode: loginController.emailFocusNode.value,
+                    validator: (value){
+                      if(value!.isEmpty){
+                        Utils.snackBar('Email', 'Enter Email');
+                      }
+                    },
+                    onFieldSubmitted: (value){
+                      Utils.filedFocusChange(context, loginController.emailFocusNode.value, loginController.passwordFocusNode.value);
+                    },
+                    decoration: InputDecoration(
+                        hintText: 'email_hint'.tr,
+                        border: OutlineInputBorder()
+                    ),
+                  ),
+                  SizedBox(height: 20,),
+                  TextFormField(
+                    controller: loginController.passwordController.value,
+                    focusNode: loginController.passwordFocusNode.value,
+                    obscureText: true,
+                    validator: (value){
+                      if(value!.isEmpty){
+                        Utils.snackBar('Password', 'Enter Password');
+                      }
+                    },
+                    onFieldSubmitted: (value){
+                    },
+                    decoration: InputDecoration(
+                        hintText: 'pass_hint'.tr,
+                        border: OutlineInputBorder()
+                    ),
+                  ),
+                ],
               ),
             ),
-
             SizedBox(height: 40,),
             RoundButtonComponent(
               width: 200,title: 'login'.tr,onPress: (){
+                if(_formKey.currentState!.validate()){
 
+                }
             },)
 
           ],
