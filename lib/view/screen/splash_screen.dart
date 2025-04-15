@@ -23,6 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
+    print("splash");
     super.initState();
     splashServices.isLogin();
   }
@@ -30,6 +31,8 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   Widget build(BuildContext context) {
+    print("splash");
+
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Center(

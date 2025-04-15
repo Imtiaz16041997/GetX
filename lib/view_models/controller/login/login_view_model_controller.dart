@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:getx/repository/login_repository/login_repository.dart';
+import 'package:getx/res/routes/routes_name.dart';
+import 'package:getx/view_models/controller/user_preference/user_preference.dart';
 
 import '../../../models/login/login_request_model.dart';
+import '../../../models/login/user_response.dart';
 import '../../../utils/utils.dart';
 
 class LoginViewModelController extends GetxController{
   final _apiRepository = LoginRepository();
+  UserPreferences userPreferences = UserPreferences();
 
   final emailController = TextEditingController().obs;
   final passwordController = TextEditingController().obs;
@@ -32,6 +36,8 @@ class LoginViewModelController extends GetxController{
       if (result['Status'] == 'OK') {
         Utils.snackBar('Success', result['Message'].toString());
         print("Login success: ${result['Message']}");
+        userPreferences.saveUser(UserResponse.fromJson(result));
+        Get.toNamed(RoutesName.homeView);
         // You can also access result['Result']['access_token'] here
       } else {
         Utils.snackBar('Error', result['Message'].toString());

@@ -22,6 +22,7 @@ class _LoginViewState extends State<LoginView> {
 
   @override
   Widget build(BuildContext context) {
+    print('login');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColor.redColor,
