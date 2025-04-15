@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:getx/components/round_button_component.dart';
 import 'package:getx/res/colors/colors.dart';
-import 'package:getx/view_models/controller/login_view_model_controller.dart';
+import 'package:getx/view_models/controller/login/login_view_model_controller.dart';
 
 import '../../../utils/utils.dart';
 

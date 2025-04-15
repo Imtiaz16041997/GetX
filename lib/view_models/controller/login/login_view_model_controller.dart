@@ -2,7 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:getx/repository/login_repository/login_repository.dart';
 
-import '../../utils/utils.dart';
+import '../../../models/login/login_request_model.dart';
+import '../../../utils/utils.dart';
 
 class LoginViewModelController extends GetxController{
   final _apiRepository = LoginRepository();
@@ -19,15 +20,11 @@ class LoginViewModelController extends GetxController{
 
     loading.value = true;
 
-    Map<String, String> data = {
-      'UserName': emailController.value.text,
-      'Password': passwordController.value.text,
-      'ImeiOrIP': 'MOB-11111',
-      'DeviceType': '',
-      'DeviceToken': '',
-      'OTP': '',
-      'TPIN': '',
-    };
+    //i want to make it username to tpin as it in the data class
+    final data = LoginRequestModel(
+      userName: emailController.value.text,
+      password: passwordController.value.text,
+    );
 
     try {
       final result = await _apiRepository.loginApi(data);
