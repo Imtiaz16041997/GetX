@@ -7,7 +7,7 @@ class LoginRepository {
   final _apiService = NetworkApiServices();
 
   Future<dynamic> loginApi(var data) async {
-    dynamic response = _apiService.postApi(data, AppUrl.loginEndPoint);
+    dynamic response = await _apiService.postApi(data, AppUrl.loginEndPoint);
 
     return response;
   }

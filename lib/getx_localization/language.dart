@@ -14,6 +14,7 @@ class Languages extends Translations{
       'welcome_back': "Welcome \nBack",
       'login': "Login",
       'pass_hint': "Password",
+      'home': "GetX",
     },
     'ur_PK':{
       'email_hint': 'احداث'
