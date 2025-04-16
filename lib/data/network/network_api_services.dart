@@ -7,9 +7,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:getx/data/app_exception.dart';
 import 'package:getx/data/network/base_api_services.dart';
+import 'package:getx/view_models/controller/user_preference/user_preference.dart';
 import 'package:http/http.dart' as http;
 
 class NetworkApiServices extends BaseApiServices {
+  UserPreferences userPreferences = UserPreferences();
   @override
   Future getApi(String url) async {
     if(kDebugMode ){
@@ -65,6 +67,34 @@ class NetworkApiServices extends BaseApiServices {
     }on SocketException{
       throw InternetException('');
     }on RequestTimeOutException {
+      throw RequestTimeOutException('');
+    }
+
+    return responseJson;
+  }
+
+  @override
+  Future getAccountApi(String url) async {
+    if(kDebugMode ){
+      print(url);
+    }
+    dynamic responseJson;
+
+    try {
+      final token = await userPreferences.getToken();
+
+      final response = await http.get(
+        Uri.parse(url),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+      ).timeout(const Duration(seconds: 10));
+
+      responseJson = returnResponse(response);
+    } on SocketException {
+      throw InternetException('');
+    } on RequestTimeOutException {
       throw RequestTimeOutException('');
     }
 

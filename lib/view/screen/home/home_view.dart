@@ -4,6 +4,7 @@ import 'package:getx/components/general_exception_widget.dart';
 import 'package:getx/data/response/status.dart';
 import 'package:getx/res/routes/routes_name.dart';
 import 'package:getx/view/screen/splash_screen.dart';
+import 'package:getx/view_models/controller/home/account_list/account_list_view_model_controller.dart';
 import 'package:getx/view_models/controller/home/home_view_model_controller.dart';
 import 'package:getx/view_models/controller/user_preference/user_preference.dart';
 
@@ -17,6 +18,7 @@ class HomeView extends StatefulWidget {
 }
 
 class _HomeViewState extends State<HomeView> {
+ final accountController = Get.put(AccountListViewModelController());
  final homeController = Get.put(HomeViewModelController());
   UserPreferences userPreferences = UserPreferences();
 
@@ -25,6 +27,7 @@ class _HomeViewState extends State<HomeView> {
     // TODO: implement initState
     super.initState();
     homeController.userListApi();
+    //accountController.accountListApi();
   }
 
   @override
