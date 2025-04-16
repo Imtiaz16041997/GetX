@@ -37,7 +37,10 @@ class LoginViewModelController extends GetxController{
         Utils.snackBar('Success', result['Message'].toString());
         print("Login success: ${result['Message']}");
         userPreferences.saveUser(UserResponse.fromJson(result));
-        Get.toNamed(RoutesName.homeView);
+        Get.delete<LoginViewModelController>();
+        Get.toNamed(RoutesName.homeView)!.then((value){
+
+        });
         // You can also access result['Result']['access_token'] here
       } else {
         Utils.snackBar('Error', result['Message'].toString());
