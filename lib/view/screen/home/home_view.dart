@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:getx/components/general_exception_widget.dart';
 import 'package:getx/data/response/status.dart';
 import 'package:getx/res/routes/routes_name.dart';
 import 'package:getx/view/screen/splash_screen.dart';
 import 'package:getx/view_models/controller/home/home_view_model_controller.dart';
 import 'package:getx/view_models/controller/user_preference/user_preference.dart';
 
+import '../../../components/internet_exceptions_widget.dart';
 import '../../../res/colors/colors.dart';
 class HomeView extends StatefulWidget {
   const HomeView({super.key});
@@ -45,7 +47,17 @@ class _HomeViewState extends State<HomeView> {
         switch(homeController.rxRequestStatus.value){
           case Status.LOADING:
             return Center(child: CircularProgressIndicator());
-          case Status.ERROR: return Text('Something went wrong!');
+          case Status.ERROR:
+            if(homeController.error.value == 'No Internet'){
+              return InternetExceptionsWidget(onPress: (){
+                homeController.refreshApi();
+              },);
+            }else{
+              return GeneralExceptionWidget(onPress: (){
+                    homeController.refreshApi();
+              });
+              return Center(child: Text(homeController.error.toString()),);
+            }
           case Status.COMPLETED: return ListView.builder(
             itemCount: homeController.userList.value.data!.length,
               itemBuilder: (context,index){
