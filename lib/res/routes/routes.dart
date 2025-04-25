@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:getx/res/routes/routes_name.dart';
+import 'package:getx/shell/nav_menu.dart';
 import 'package:getx/view/screen/home/home_view.dart';
 import 'package:getx/view/screen/login/login_view.dart';
 import 'package:getx/view/screen/splash_screen.dart';
@@ -16,6 +17,13 @@ class AppRoutes{
     GetPage(
         name: RoutesName.loginView,
         page: () => LoginView(),
+        transitionDuration: Duration(milliseconds: 250),
+        transition: Transition.leftToRightWithFade
+    ),
+
+    GetPage(
+        name: RoutesName.navView,
+        page: () => NavMenu(),
         transitionDuration: Duration(milliseconds: 250),
         transition: Transition.leftToRightWithFade
     ),

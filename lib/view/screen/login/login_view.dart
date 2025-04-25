@@ -9,7 +9,7 @@ import 'package:getx/view_models/controller/login/login_view_model_controller.da
 
 import '../../../utils/utils.dart';
 
-class LoginView extends StatefulWidget {
+ class LoginView extends StatefulWidget {
   const LoginView({super.key});
 
   @override
